@@ -1,6 +1,6 @@
 ﻿//Kevin Friddle
-//Created: 9/6/16
-//Last Updated: 9/6/16
+//Created: 9/6/2016
+//Last Updated: 9/12/2016
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
@@ -21,6 +21,7 @@ public class Interact : MonoBehaviour {
         prompt.SetActive(false);
 
         canInteract = false;
+        hit = new RaycastHit();
 	}
 	
 	// Update is called once per frame
@@ -36,12 +37,20 @@ public class Interact : MonoBehaviour {
 
     void FixedUpdate()
     {
-        Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, rayDistance);
 
-        if(hit.collider.gameObject.tag == iTag)
+
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, rayDistance))
         {
-            prompt.SetActive(true);
-            canInteract = true;
+            if (hit.collider.gameObject.tag == iTag)
+            {
+                prompt.SetActive(true);
+                canInteract = true;
+            }
+            else
+            {
+                prompt.SetActive(false);
+                canInteract = false;
+            }
         }
         else
         {
