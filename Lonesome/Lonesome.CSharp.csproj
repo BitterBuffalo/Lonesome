@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Controller.cs" />
+    <Compile Include="Assets\Scripts\DoorITBL.cs" />
     <Compile Include="Assets\Scripts\Interact.cs" />
     <Compile Include="Assets\Scripts\Interactable.cs" />
   </ItemGroup>

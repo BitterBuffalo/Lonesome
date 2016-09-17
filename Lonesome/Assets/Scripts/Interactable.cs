@@ -1,6 +1,6 @@
 ﻿//Kevin Friddle
 //Created: 9/11/2016
-//Last Updated: 9/11/2016
+//Last Updated: 9/17/2016
 using UnityEngine;
 using System.Collections;
 
@@ -15,11 +15,15 @@ public class Interactable : MonoBehaviour {
     Renderer rd;
     Material iconMat;
     Color iconColor;
+
+    protected bool interacting; //determines if the object is being interacted with
+
 	// Use this for initialization
 	void Start () {
         icon.SetActive(false);
         rd = GetComponent<Renderer>();
         iconMat = icon.GetComponent<Material>();
+        interacting = false;
 	}
 	
 	// Update is called once per frame
@@ -56,11 +60,16 @@ public class Interactable : MonoBehaviour {
         {
             icon.SetActive(false);
         }
+
+        if(interacting)
+        {
+            Interact();
+        }
 	}
 
     public virtual void Interact()
     {
-
+        Debug.Log("Interacting with " + gameObject.name);
     }
 
     public float Alpha
@@ -79,5 +88,11 @@ public class Interactable : MonoBehaviour {
     {
         get { return iconColor; }
         set { iconColor = value; }
+    }
+
+    public bool Interacting
+    {
+        get { return interacting; }
+        set { interacting = value; }
     }
 }

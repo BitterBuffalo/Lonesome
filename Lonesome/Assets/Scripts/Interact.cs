@@ -1,6 +1,6 @@
 ﻿//Kevin Friddle
 //Created: 9/6/2016
-//Last Updated: 9/12/2016
+//Last Updated: 9/17/2016
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
@@ -14,6 +14,7 @@ public class Interact : MonoBehaviour {
     RaycastHit hit;
     //Text promptText;
     bool canInteract;
+    Interactable item;
 
 	// Use this for initialization
 	void Start () {
@@ -28,23 +29,27 @@ public class Interact : MonoBehaviour {
 	void Update () {
 	    if(canInteract)
         {
-            if(Input.GetKeyDown(KeyCode.E))
+            if(Input.GetMouseButton(0))
             {
                 Debug.Log("Interacted!");
+                item.Interacting = true;
+            }
+            else if(Input.GetMouseButtonUp(0))
+            {
+                item.Interacting = false;
             }
         }
 	}
 
     void FixedUpdate()
     {
-
-
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, rayDistance))
         {
             if (hit.collider.gameObject.tag == iTag)
             {
                 prompt.SetActive(true);
                 canInteract = true;
+                item = hit.collider.gameObject.GetComponent<Interactable>();
             }
             else
             {
