@@ -63,10 +63,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\CharacterController.cs" />
     <Compile Include="Assets\Controller.cs" />
     <Compile Include="Assets\Scripts\DoorITBL.cs" />
+    <Compile Include="Assets\Scripts\Icon.cs" />
     <Compile Include="Assets\Scripts\Interact.cs" />
     <Compile Include="Assets\Scripts\Interactable.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Store_Assets\Office Suite Asset Bundle\READ_ME.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

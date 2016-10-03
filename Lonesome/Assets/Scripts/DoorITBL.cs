@@ -1,39 +1,73 @@
 ﻿//Kevin Friddle
 //Created: 9/17/2016
-//Last Updated: 9/19/2016
+//Last Updated: 10/3/2016
 using UnityEngine;
 using System.Collections;
 
 public class DoorITBL : Interactable {
+    
+    public float speed; //the speed at which the door opens
+    public float rotationOffset;    //while interacted, this is the minimum rotation offset at which the door will begin to move
+    public GameObject doorknob;
 
-    public GameObject cam;
-    public float speed;
-    public Interact actor;  //object to act upon the door
+    GameObject initialCamRotation;
     Rigidbody rb;
-    bool rdSet; //has the ray distance been set
 
 	// Use this for initialization
-	void Start () {
-        rb = gameObject.GetComponent<Rigidbody>();
-        rdSet = false;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	    if(interacting && !rdSet)
+	public override void Start () {
+        base.Start();
+        initialCamRotation = null;
+        rb = null;  //for error checking
+
+        if (doorknob.GetComponent<Rigidbody>())
+        { rb = doorknob.GetComponent<Rigidbody>(); }
+        else { Debug.Log("Rigidbody does not exist on doorknob. Add rb to object."); }
+    }
+
+    void Update()
+    {
+        if (Input.GetMouseButtonUp(0))
         {
-            rdSet = true;
-            actor.AnchorDistance = Vector3.Distance(cam.transform.position, transform.position);
+            Interacted = false;
+            actor.Interacting = false;
+            Destroy(initialCamRotation);
+            initialCamRotation = null;
         }
-        else if(!interacting && rdSet)
-        {
-            rdSet = false;
-        }
-	}
+    }
 
     public override void Interact()
     {
-        //rb.AddRelativeTorque(cam.transform.forward * speed);
-        rb.angularVelocity += (actor.Anchor.GetPoint(actor.AnchorDistance) - transform.position) * speed * Time.deltaTime; 
+       if(initialCamRotation == null)
+        {
+            initialCamRotation = new GameObject();
+            initialCamRotation.transform.rotation = new Quaternion(actor.cam.transform.rotation.x, actor.cam.transform.rotation.y,
+            actor.cam.transform.rotation.z, actor.cam.transform.rotation.w);
+            //Debug.Log("Initial Cam Rotation: " + initialCamRotation.transform.rotation.eulerAngles.y);
+        }
+        //Debug.Log("The difference in rotation is: " + (actor.cam.transform.rotation.eulerAngles.y - initialCamRotation.transform.rotation.eulerAngles.y));
+        if ((actor.cam.transform.rotation.eulerAngles.y - initialCamRotation.transform.rotation.eulerAngles.y) >= rotationOffset)
+        {
+            Debug.Log("Rotation is greater than the offset");
+            if(rb != null)
+            {
+                Debug.Log("Force has been applied!");
+                rb.AddRelativeTorque(Vector3.up * speed);
+            }
+
+            initialCamRotation.transform.rotation = new Quaternion(actor.cam.transform.rotation.x, actor.cam.transform.rotation.y, 
+                actor.cam.transform.rotation.z, actor.cam.transform.rotation.w);
+        }
+        else if ((actor.cam.transform.rotation.eulerAngles.y - initialCamRotation.transform.rotation.eulerAngles.y) <= -rotationOffset)
+        {
+            Debug.Log("Rotation is less than the offset");
+            if (rb != null)
+            {
+                Debug.Log("Force has been applied!");
+                rb.AddRelativeTorque(Vector3.up * -speed);
+            }
+
+            initialCamRotation.transform.rotation = new Quaternion(actor.cam.transform.rotation.x, actor.cam.transform.rotation.y,
+                actor.cam.transform.rotation.z, actor.cam.transform.rotation.w);
+        }
     }
 }
