@@ -4,11 +4,12 @@ using System.Collections;
 public class CharacterController : MonoBehaviour {
 
     public float speed = 1.0f;
+    public Camera mainCamera;
 
     // Use this for initialization
-	void Start ()
+	void Awake ()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
 	}
 	
 	// Update is called once per frame
@@ -18,6 +19,7 @@ public class CharacterController : MonoBehaviour {
         float moveVertical = Input.GetAxis("Horizontal") * speed;
 
         transform.Translate(moveVertical, 0, moveHorizontal);
+        transform.eulerAngles = new Vector3(0, mainCamera.GetComponent<Transform>().eulerAngles.y, 0);
 
         if(Input.GetKeyDown("escape"))
         {

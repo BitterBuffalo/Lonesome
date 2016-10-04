@@ -63,8 +63,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\CameraController.cs" />
     <Compile Include="Assets\CharacterController.cs" />
-    <Compile Include="Assets\Controller.cs" />
     <Compile Include="Assets\Scripts\DoorITBL.cs" />
     <Compile Include="Assets\Scripts\Icon.cs" />
     <Compile Include="Assets\Scripts\Interact.cs" />
