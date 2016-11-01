@@ -67,6 +67,7 @@
     <Compile Include="Assets\CharacterController.cs" />
     <Compile Include="Assets\Scripts\DoorITBL.cs" />
     <Compile Include="Assets\Scripts\Icon.cs" />
+    <Compile Include="Assets\Scripts\InspectITBL.cs" />
     <Compile Include="Assets\Scripts\Interact.cs" />
     <Compile Include="Assets\Scripts\Interactable.cs" />
   </ItemGroup>
