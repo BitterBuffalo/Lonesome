@@ -1,6 +1,6 @@
 ﻿//Kevin Friddle
 //Created: 9/6/2016
-//Last Updated: 10/3/2016
+//Last Updated: 11/07/2016
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
@@ -26,7 +26,7 @@ public class Interact : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(currentHit && currentHit.GetComponent<Interactable>())
+        if(currentHit && currentHit.GetComponent<Interactable>() && !interacting)
         {
             if(Input.GetMouseButtonDown(0))
             {

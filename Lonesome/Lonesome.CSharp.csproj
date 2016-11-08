@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scripts\InspectITBL.cs" />
     <Compile Include="Assets\Scripts\Interact.cs" />
     <Compile Include="Assets\Scripts\Interactable.cs" />
+    <Compile Include="Assets\Scripts\newInspectITBL.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Store_Assets\Office Suite Asset Bundle\READ_ME.txt" />
