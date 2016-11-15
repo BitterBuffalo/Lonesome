@@ -1,6 +1,6 @@
 ﻿//Kevin Friddle
 //Created: 9/11/2016
-//Last Updated: 10/3/2016
+//Last Updated: 11/14/2016
 using UnityEngine;
 using System.Collections;
 
@@ -8,6 +8,9 @@ public class Interactable : MonoBehaviour {
     public Transform player;
     public GameObject icon; //Icon to be shown on interactable object
     public Interact actor;
+
+    public AudioSource sound;
+    public AudioClip[] soundClips;
 
     protected bool interacted; //determines if the object is being interacted with
     Renderer iconRenderer;  //renderer of the icon. Set enabled to false to make the icon invisible

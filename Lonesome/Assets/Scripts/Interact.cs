@@ -1,6 +1,6 @@
 ﻿//Kevin Friddle
 //Created: 9/6/2016
-//Last Updated: 11/07/2016
+//Last Updated: 11/14/2016
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
@@ -32,6 +32,12 @@ public class Interact : MonoBehaviour
             {
                 interacting = true;
                 currentHit.GetComponent<Interactable>().Interacted = true;
+
+                if (currentHit.GetComponent<Interactable>().soundClips.Length > 0 && currentHit.GetComponent<Interactable>().sound)
+                {
+                    currentHit.GetComponent<Interactable>().sound.clip = currentHit.GetComponent<Interactable>().soundClips[0];
+                    currentHit.GetComponent<Interactable>().sound.Play();
+                }
             }
         }
     }
